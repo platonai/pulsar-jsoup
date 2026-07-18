@@ -15,9 +15,6 @@
 
 package ai.platon.pulsar.jsoup.ext;
 
-import org.apache.commons.math3.linear.OpenMapRealVector;
-import org.apache.commons.math3.linear.RealVector;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 
 import javax.annotation.Nonnull;
@@ -31,15 +28,15 @@ import java.util.Map;
  * We have two modifications to jsoup:
  * 1. add NodeExt to Node
  * 2. make NodeVisitor and NodeFilter compatible with kotlin lambda
- * */
+ *
+ * Core storage fields ({@code variables}, {@code tuples}, {@code node}) are kept here.
+ * All feature-related fields ({@code features}, {@code featureBlock}, {@code nodeIndex},
+ * {@code ownerDocumentNode}, {@code ownerBody}, {@code immutableText}) have been moved
+ * to the Kotlin extension layer in {@code ai.platon.pulsar.dom.nodes.node.ext} and are
+ * stored in the {@code variables} map.
+ */
 public class NodeExt {
-    public static final RealVector EMPTY_FEATURE = new OpenMapRealVector();
-
     private final Node node;
-    private Node ownerDocumentNode;
-    private Node ownerBody;
-    private String immutableText;
-    private RealVector features;
     private Map<String, Object> variables;
     private Map<String, List<Object>> tuples;
 
@@ -51,55 +48,6 @@ public class NodeExt {
         for (String attrName : attrNames) {
             node.removeAttr(attrName);
         }
-    }
-
-    public Node getOwnerDocumentNode() {
-        if (ownerDocumentNode == null) {
-            ownerDocumentNode = node.ownerDocument();
-        }
-        return ownerDocumentNode;
-    }
-
-    public void setOwnerDocumentNode(Node ownerDocumentNode) {
-        this.ownerDocumentNode = ownerDocumentNode;
-    }
-
-    public Node getOwnerBody() {
-        if (ownerBody == null) {
-            Document document = node.ownerDocument();
-            if (document != null) {
-                ownerBody = document.body();
-            }
-        }
-        return ownerBody;
-    }
-
-    public void setOwnerBody(Node ownerBody) {
-        this.ownerBody = ownerBody;
-    }
-
-    @Nonnull
-    public String getImmutableText() {
-        if (immutableText == null) {
-            immutableText = "";
-        }
-        return immutableText;
-    }
-
-    public void setImmutableText(String immutableText) {
-        this.immutableText = immutableText;
-    }
-
-    @Nonnull
-    public RealVector getFeatures() {
-        if (features == null) {
-            features = new OpenMapRealVector();
-        }
-        return features;
-    }
-
-    public void setFeatures(RealVector features) {
-        this.features = features;
     }
 
     @Nonnull
