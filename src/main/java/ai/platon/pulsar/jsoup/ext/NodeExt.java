@@ -16,20 +16,18 @@
 package ai.platon.pulsar.jsoup.ext;
 
 import org.apache.commons.math3.linear.RealVector;
-import org.jsoup.nodes.Node;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * The pulsar extension.
- *
+ * <p>
  * We have two modifications to jsoup:
  * 1. add NodeExt to Node
  * 2. make NodeVisitor and NodeFilter compatible with kotlin lambda
- *
+ * <p>
  * Core storage fields ({@code variables}, {@code tuples}, {@code node}) are kept here.
  * All feature-related fields ({@code features}, {@code featureBlock}, {@code nodeIndex},
  * {@code ownerDocumentNode}, {@code ownerBody}, {@code immutableText}) have been moved
