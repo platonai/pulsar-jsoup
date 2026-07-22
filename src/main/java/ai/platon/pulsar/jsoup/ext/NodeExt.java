@@ -37,7 +37,7 @@ import java.util.Map;
  * stored in the {@code variables} map.
  */
 public class NodeExt {
-    public double[] features;
+    public RealVector features;
     private Map<String, Object> variables;
 
     @Nonnull
