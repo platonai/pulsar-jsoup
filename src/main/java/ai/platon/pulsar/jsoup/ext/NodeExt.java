@@ -15,6 +15,7 @@
 
 package ai.platon.pulsar.jsoup.ext;
 
+import org.apache.commons.math3.linear.RealVector;
 import org.jsoup.nodes.Node;
 
 import javax.annotation.Nonnull;
@@ -36,19 +37,8 @@ import java.util.Map;
  * stored in the {@code variables} map.
  */
 public class NodeExt {
-    private final Node node;
+    public double[] features;
     private Map<String, Object> variables;
-    private Map<String, List<Object>> tuples;
-
-    public NodeExt(Node node) {
-        this.node = node;
-    }
-
-    public void removeAttrs(String... attrNames) {
-        for (String attrName : attrNames) {
-            node.removeAttr(attrName);
-        }
-    }
 
     @Nonnull
     public Map<String, Object> getVariables() {
@@ -60,17 +50,5 @@ public class NodeExt {
 
     public void setVariables(Map<String, Object> variables) {
         this.variables = variables;
-    }
-
-    @Nonnull
-    public Map<String, List<Object>> getTuples() {
-        if (tuples == null) {
-            tuples = new HashMap<>();
-        }
-        return tuples;
-    }
-
-    public void setTuples(Map<String, List<Object>> tuples) {
-        this.tuples = tuples;
     }
 }
