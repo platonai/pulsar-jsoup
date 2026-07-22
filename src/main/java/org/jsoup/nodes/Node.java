@@ -27,7 +27,7 @@ public abstract class Node implements Cloneable {
     @Nullable Node parentNode; // Nodes don't always have parents
     int siblingIndex;
 
-    private final NodeExt extension = new NodeExt(this);
+    private final NodeExt extension = new NodeExt();
 
     /**
      * Default constructor. Doesn't setup base uri, children, or attributes; use with caution.
